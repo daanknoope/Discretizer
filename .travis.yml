@@ -1,0 +1,21 @@
+dist: xenial
+language: python
+python:
+	- "3.6"
+	- "3.7"
+	- "3.7-dev"
+	- "3.8-dev"
+	- "nightly"
+
+install:
+	- pip install pytest pytest-cov codecov
+	- pip install -r requirements.txt
+
+script: 
+	- pytest --cov=./
+
+env:
+	- CODECOV_TOKEN="0cd4a11b-fd23-4b86-b0f4-498c426bc9b7"
+
+after_success:
+	-codecov
