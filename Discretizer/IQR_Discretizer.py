@@ -1,4 +1,4 @@
-from Discretizer.SRAD_Discretizer import AbstractUnsupervisedDiscretizer
+from Discretizer.AbstractUnsupervisedDiscretizer import AbstractUnsupervisedDiscretizer
 
 
 class IQR_Discretizer(AbstractUnsupervisedDiscretizer):
