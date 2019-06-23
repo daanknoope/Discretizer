@@ -16,4 +16,4 @@ env:
   - CODECOV_TOKEN="0cd4a11b-fd23-4b86-b0f4-498c426bc9b7"
 
 after_success:
-  -codecov
+  - codecov
