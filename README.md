@@ -6,6 +6,7 @@ Python library for discretizing data
 ```bash
 git clone git@github.com:daanknoope/Discretizer.git
 cd Discretizer
+pip install -r requirements.txt
 pip install .
 ```
 
