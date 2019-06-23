@@ -6,6 +6,6 @@ setup(name='Discretizer',
       author='Daan Knoope',
       author_email='daan@knoope.dev',
       license='MIT',
-      packages=find_packages(), install_requires=['pandas'],
+      packages=find_packages(), install_requires=['pandas', 'numpy', 'mdlp-discretization'],
       python_requires='>3.6'
       )
