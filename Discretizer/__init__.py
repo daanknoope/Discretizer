@@ -13,9 +13,7 @@ class Discretizer(object):
     def discretize(df, column, method, hp=None):
         return DiscretizerFactory.get_discretizer(method).fit_apply(df[column], hp)
 
-    @staticmethod
-    def create_strategy_name(discretization_var, method, hp):
-        return f'{discretization_var}|{method}|{hp}'
+
 
     @classmethod
     def discretize_from_strategies(cls, df, strategies):
