@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Tuple
+from typing import Tuple, List
 
 import numpy as np
+from pandas import DataFrame
 
 
 class AbstractDiscretizer(ABC):
@@ -10,16 +11,14 @@ class AbstractDiscretizer(ABC):
     bins = []
     sep = '|'
 
-    @classmethod
     @abstractmethod
     def get_name(cls):
         ...
 
-    @classmethod
-    def get_bins(cls, *args):
-        bins = cls.get_raw_bins(*args)
-        bins[0] = cls.min_int
-        bins[-1] = cls.max_int
+    def get_bins(self, variables: List[str], df: DataFrame, target=None, number_of_bins=0):
+        bins = self.get_raw_bins(variables, df, target, number_of_bins)
+        bins[0] = self.min_int
+        bins[-1] = self.max_int
         return bins
 
     @classmethod
@@ -27,9 +26,13 @@ class AbstractDiscretizer(ABC):
         return f'{discretization_var}{cls.sep}{method}{cls.sep}{hyperparameter}'
 
     @classmethod
-    def from_strategy_name(cls, input : str) -> Tuple[str,str,int]:
+    def from_strategy_name(cls, input: str) -> Tuple[str, str, int]:
         split = input.split(cls.sep)
         discretization_var = split[0]
         method = split[1]
         hyperparameter = int(split[2])
         return (discretization_var, method, hyperparameter)
+
+    @abstractmethod
+    def get_raw_bins(self, variables: List[str], df: DataFrame, target: str, number_of_bins: int) -> List[int]:
+        ...

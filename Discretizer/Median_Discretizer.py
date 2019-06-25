@@ -2,8 +2,9 @@ from Discretizer.AbstractUnsupervisedDiscretizer import AbstractUnsupervisedDisc
 
 
 class Median_Discretizer(AbstractUnsupervisedDiscretizer):
-    @staticmethod
-    def get_raw_bins(column, _):
+
+    def get_raw_bins(self, variables, df, target=None, number_of_bins=None):
+        column = df[variables[0]]
         return [None, column.median(), None]
 
     @classmethod

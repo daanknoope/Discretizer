@@ -5,9 +5,9 @@ from Discretizer.AbstractUnsupervisedDiscretizer import AbstractUnsupervisedDisc
 
 class EWD_Discretizer(AbstractUnsupervisedDiscretizer):
 
-    @staticmethod
-    def get_raw_bins(column, number_of_bins):
-        _, bins = pd.cut(column, bins=number_of_bins, retbins=True)
+    def get_raw_bins(self, variables, df, target=None, number_of_bins=3):
+        print(variables)
+        _, bins = pd.cut(df[variables[0]], bins=number_of_bins, retbins=True)
         return bins
 
     @classmethod

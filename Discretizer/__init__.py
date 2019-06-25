@@ -13,10 +13,10 @@ class Discretizer(object):
         return discretizer.apply(column)
 
     @staticmethod
-    def discretize(df, column, method, hp=None):
+    def discretize(df, variable, method, hp=None):
         print(df)
-        print(column)
-        return DiscretizerFactory.get_discretizer(method).fit_apply(df[column], hp)
+        print(variable)
+        return DiscretizerFactory.get_discretizer(method).fit_apply(variable, df, hp)
 
     @classmethod
     def create_strategy_name(cls, discretization_var: str, method: str, hyperparameter: int) -> str:

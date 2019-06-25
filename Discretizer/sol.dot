@@ -1,8 +1,5 @@
 digraph {
    y;
    x|EWD|2;
-   x|EWD|3;
-   x|EWD|10;
-   x|EWD|3 -> y;
-   x|EWD|10 -> y;
+   x|EWD|2 -> y;
 }

@@ -3,16 +3,15 @@ import os
 import subprocess
 from itertools import product, chain
 from shutil import which
-
-from pandas import DataFrame
+from typing import NewType, Dict, List, Tuple
 
 import pandas as pd
+from gobnilp import parse_gobnilp_structure
+from pandas import DataFrame
 from pgmpy.models import BayesianModel
 
 from Discretizer import DiscretizerFactory, Discretizer
 from Discretizer.AbstractSupervisedDiscretizer import AbstractSupervisedDiscretizer
-from typing import NewType, Dict, List, Tuple
-from gobnilp import parse_gobnilp_structure
 
 HyperParameter = NewType("HyperParameter", int)
 Grid = NewType("Grid", Dict[str, List[HyperParameter]])
@@ -84,9 +83,9 @@ class SRAD_Discretizer(AbstractSupervisedDiscretizer):
         print(strategies)
         return Discretizer.discretize_from_strategies(ddf, strategies)
 
-    def get_raw_bins(self, column: pd.Series, target: str, df: DataFrame) -> List[int]:
+    def get_raw_bins(self, variables: List[str], df: DataFrame, target: str, number_of_bins=0) -> List[int]:
         print(df)
-        selected_nodes = self.get_discretization_strategy(df, column.iloc[:, 0].name, target, self.grid)
+        selected_nodes = self.get_discretization_strategy(df, variables[0], target, self.grid)
 
         # In this version we're going to always select the first strategy, and we assume only one exists..
         discretization_var, method, hp = selected_nodes[0]
@@ -95,7 +94,7 @@ class SRAD_Discretizer(AbstractSupervisedDiscretizer):
         if isinstance(discretizer, AbstractSupervisedDiscretizer):
             raise ValueError("Using supervised discretizers has not yet been implemented for SRAD")
 
-        return discretizer.get_bins(df[discretization_var],hp)
+        return discretizer.get_bins([discretization_var], df, target=None, number_of_bins=hp)
 
     @classmethod
     def get_name(cls):
