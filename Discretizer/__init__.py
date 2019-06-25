@@ -14,8 +14,6 @@ class Discretizer(object):
 
     @staticmethod
     def discretize(df, variable, method, hp=None):
-        print(df)
-        print(variable)
         return DiscretizerFactory.get_discretizer(method).fit_apply(variable, df, hp)
 
     @classmethod
@@ -35,7 +33,7 @@ class Discretizer(object):
         ddf = df.copy()
         for (discretization_var, method, hp) in strategies:
             ddf[cls.create_strategy_name(discretization_var, method, hp)] = cls.discretize(df, discretization_var,
-                                                                                           method, hp)
+                                                                                           method, hp)[discretization_var]
         discretization_vars = set([x for (x, y, z) in strategies])
         for discretization_var in discretization_vars:
             ddf = ddf.drop(discretization_var, axis=1)

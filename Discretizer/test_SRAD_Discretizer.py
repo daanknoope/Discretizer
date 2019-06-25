@@ -11,7 +11,6 @@ class TestSRAD_Discretizer(TestCase):
     def test_unfold_grid(self):
         grid = {'EWD': [1, 2, 3], 'MDLP': [0], 'EFD': [1, 2, 10]}
         expectedResult = [('EWD', 1), ('EWD', 2), ('EWD', 3), ('MDLP', 0), ('EFD', 1), ('EFD', 2), ('EFD', 10)]
-        print(SRAD_Discretizer.unfold_grid(grid))
         self.assertEqual(expectedResult, SRAD_Discretizer.unfold_grid(grid))
 
 

@@ -2,7 +2,7 @@ from Discretizer.AbstractUnsupervisedDiscretizer import AbstractUnsupervisedDisc
 
 
 class IQR_Discretizer(AbstractUnsupervisedDiscretizer):
-    @staticmethod
+
     def get_raw_bins(self, variables, df, target=None, number_of_bins=None):
         column = df[variables[0]]
         q2 = column.quantile(0.25)

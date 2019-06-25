@@ -5,6 +5,7 @@ from Discretizer.MDLP_Discretizer import MDLP_Discretizer
 from Discretizer.Median_Discretizer import Median_Discretizer
 
 
+
 class DiscretizerFactory:
     @staticmethod
     def get_discretizer(method):
@@ -18,5 +19,8 @@ class DiscretizerFactory:
             return Median_Discretizer()
         elif method == 'MDLP':
             return MDLP_Discretizer()
+        elif method == 'SRAD':
+            from Discretizer.SRAD_Discretizer import SRAD_Discretizer
+            return SRAD_Discretizer()
         else:
             raise ValueError(f'Discretization method "{method} is not implemented."')

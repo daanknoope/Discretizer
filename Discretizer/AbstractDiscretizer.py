@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Tuple, List
 
 import numpy as np
+import pandas as pd
 from pandas import DataFrame
 
 
@@ -36,3 +37,8 @@ class AbstractDiscretizer(ABC):
     @abstractmethod
     def get_raw_bins(self, variables: List[str], df: DataFrame, target: str, number_of_bins: int) -> List[int]:
         ...
+
+    def apply(self, column):
+        if not len(self.bins):
+            raise ValueError('Discretizer has not been fitted yet or has created empty bins')
+        return pd.cut(column, bins=self.bins, retbins=False, labels=range(0, len(self.bins) - 1))
