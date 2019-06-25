@@ -1,0 +1,4 @@
+gobnilp/outputfile/dot = "sol.dot"
+                gobnilp/dagconstraintsfile = "constraints.con"
+                gobnilp/scoring/palim = 6
+                gobnilp/scoring/alpha = 10

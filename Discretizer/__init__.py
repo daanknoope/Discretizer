@@ -1,9 +1,12 @@
+from typing import Tuple
+
 from Discretizer.DiscretizerFactory import DiscretizerFactory
 
 name = 'Discretizer'
 
 
 class Discretizer(object):
+    sep = '|'
 
     @staticmethod
     def discretize_from_object(df, column, discretizer):
@@ -11,9 +14,21 @@ class Discretizer(object):
 
     @staticmethod
     def discretize(df, column, method, hp=None):
+        print(df)
+        print(column)
         return DiscretizerFactory.get_discretizer(method).fit_apply(df[column], hp)
 
+    @classmethod
+    def create_strategy_name(cls, discretization_var: str, method: str, hyperparameter: int) -> str:
+        return f'{discretization_var}{cls.sep}{method}{cls.sep}{hyperparameter}'
 
+    @classmethod
+    def from_strategy_name(cls, input: str) -> Tuple[str, str, int]:
+        split = input.split(cls.sep)
+        discretization_var = split[0]
+        method = split[1]
+        hyperparameter = int(split[2])
+        return (discretization_var, method, hyperparameter)
 
     @classmethod
     def discretize_from_strategies(cls, df, strategies):

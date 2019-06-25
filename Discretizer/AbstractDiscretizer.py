@@ -24,7 +24,7 @@ class AbstractDiscretizer(ABC):
 
     @classmethod
     def create_strategy_name(cls, discretization_var: str, method: str, hyperparameter: int) -> str:
-        return f'{discretization_var}{cls.sep}{method}{cls}{hyperparameter}'
+        return f'{discretization_var}{cls.sep}{method}{cls.sep}{hyperparameter}'
 
     @classmethod
     def from_strategy_name(cls, input : str) -> Tuple[str,str,int]:
