@@ -18,7 +18,7 @@ Grid = NewType("Grid", Dict[str, List[HyperParameter]])
 
 
 class SRAD_Discretizer(AbstractSupervisedDiscretizer):
-    grid = {'EWD': [2, 3, 10], 'EFD': [2, 3, 10], 'IQR': [0], 'Median': [0]}
+    grid = {'EWD': [2, 3, 6, 12, 32], 'EFD': [2, 3, 6, 12, 32], 'IQR': [0], 'Median': [0]}
 
     def __init__(self, parent_limit=6, alpha=10,
                  grid=None):
