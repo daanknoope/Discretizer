@@ -36,6 +36,7 @@ class SRAD_Discretizer(AbstractSupervisedDiscretizer):
         for var in discretization_vars:
             d_var = [self.create_strategy_name(var, method, hp) for (method, hp) in self.unfold_grid(grid)]
             constraints += [f'~{x}<-{y}' for (x, y) in product(d_var, d_var)]
+            constraints += [f'~{x}->{objective}<-{y}' for (x,y) in product(d_var, d_var) if x!=y]
             constraints += [f'~{x}<-{objective}' for x in d_var]
         return constraints
 
