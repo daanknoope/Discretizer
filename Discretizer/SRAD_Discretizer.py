@@ -12,6 +12,7 @@ from pgmpy.models import BayesianModel
 
 from Discretizer import DiscretizerFactory, Discretizer
 from Discretizer.AbstractSupervisedDiscretizer import AbstractSupervisedDiscretizer
+from Discretizer.DDBN import DDBN
 
 HyperParameter = NewType("HyperParameter", int)
 Grid = NewType("Grid", Dict[str, List[HyperParameter]])
@@ -58,9 +59,9 @@ class SRAD_Discretizer(AbstractSupervisedDiscretizer):
     def get_discretization_graph(self, df: DataFrame, discretization_var: str, grid: Grid,
                                  objective: str) -> BayesianModel:
         ddf = self.create_discretization_dataframe(df, discretization_var, grid)
-        print(objective)
-        constraints = self.create_constraints([discretization_var], grid, objective)
-        G = self.structure_learn(self.discr_df_to_dat(ddf), self.get_discretization_settings(), constraints)
+        # constraints = self.create_constraints([discretization_var], grid, objective)
+        G = DDBN.learn_discretization_DBN(ddf, objective, [x for x in df.columns if self.sep in x], self.get_discretization_settings())
+        # G = self.structure_learn(self.discr_df_to_dat(ddf), self.get_discretization_settings(), constraints)
         return G
 
     def get_discretization_strategy(self, df: DataFrame, discretization_var: str, objective: str, grid: Grid) -> List[

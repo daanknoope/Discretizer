@@ -22,7 +22,7 @@ class TestSRAD_Discretizer(TestCase):
         d = SRAD_Discretizer()
         output = d.create_constraints(discretization_vars, grid, objective)
         test_constraint = f'~{d.create_strategy_name("speed", "EWD", 10)}<-{d.create_strategy_name("speed", "MDLP", 0)}'
-        test_self_constraint = f'~{d.create_strategy_name("speed", "EWD", 10)}->{objective}<-{d.create_strategy_name("speed", "EWD", 2)}'
+        test_self_constraint = f'~{d.create_strategy_name("speed", "EWD", 10)}-{objective}-{d.create_strategy_name("speed", "EWD", 2)}'
         self.assertTrue(test_constraint in output)
         self.assertTrue(test_self_constraint in output)
 
