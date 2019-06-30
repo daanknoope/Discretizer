@@ -15,6 +15,7 @@ class DDBN:
 
     @staticmethod
     def map_variable(variable, mapping):
+        print(mapping)
         return mapping[variable]
 
     @staticmethod
@@ -27,7 +28,7 @@ class DDBN:
         return dat_string
 
     @staticmethod
-    def get_raw_jkl(df, ESS=20, paren_lim=6):
+    def get_raw_jkl(df, ESS=10, paren_lim=5):
         open('dat.tab', 'w').write(DDBN.create_tab_from_df(df))
         command = ["scoring", "dat.tab", str(ESS), str(paren_lim), "noprune", "bdeu", '0']
         out = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

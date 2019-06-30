@@ -31,7 +31,7 @@ class AbstractDiscretizer(ABC):
         split = input.split(cls.sep)
         discretization_var = split[0]
         method = split[1]
-        hyperparameter = int(split[2])
+        hyperparameter = int(split[2].split('_')[0])
         return (discretization_var, method, hyperparameter)
 
     @abstractmethod
@@ -41,4 +41,5 @@ class AbstractDiscretizer(ABC):
     def apply(self, column):
         if not len(self.bins):
             raise ValueError('Discretizer has not been fitted yet or has created empty bins')
+        print(type(self))
         return pd.cut(column, bins=self.bins, retbins=False, labels=range(0, len(self.bins) - 1))

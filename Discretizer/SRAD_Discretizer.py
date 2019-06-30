@@ -19,9 +19,9 @@ Grid = NewType("Grid", Dict[str, List[HyperParameter]])
 
 
 class SRAD_Discretizer(AbstractSupervisedDiscretizer):
-    grid = {'EWD': [2, 3, 6, 12, 32], 'EFD': [2, 3, 6, 12, 32], 'IQR': [0], 'Median': [0]}
+    grid = {'EWD': [2, 3, 10], 'EFD': [2, 3, 10], 'IQR': [0], 'Median': [0]}
 
-    def __init__(self, parent_limit=6, alpha=10,
+    def __init__(self, parent_limit=4, alpha=10,
                  grid=None):
         self.parent_limit = parent_limit
         self.alpha = alpha
@@ -60,7 +60,7 @@ class SRAD_Discretizer(AbstractSupervisedDiscretizer):
                                  objective: str) -> BayesianModel:
         ddf = self.create_discretization_dataframe(df, discretization_var, grid)
         # constraints = self.create_constraints([discretization_var], grid, objective)
-        G = DDBN.learn_discretization_DBN(ddf, objective, [x for x in df.columns if self.sep in x], self.get_discretization_settings())
+        G = DDBN.learn_discretization_DBN(ddf, objective, [x for x in ddf.columns if self.sep in x], self.get_discretization_settings())
         # G = self.structure_learn(self.discr_df_to_dat(ddf), self.get_discretization_settings(), constraints)
         return G
 

@@ -7,7 +7,10 @@ class IQR_Discretizer(AbstractUnsupervisedDiscretizer):
         column = df[variables[0]]
         q2 = column.quantile(0.25)
         q4 = column.quantile(0.75)
-        return [None, q2, q4, None]
+        if q2 == q4:
+            return [None, q2, None]
+        else:
+            return [None, q2, q4, None]
 
     @classmethod
     def get_name(self):
