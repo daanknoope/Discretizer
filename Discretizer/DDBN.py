@@ -15,7 +15,7 @@ class DDBN:
 
     @staticmethod
     def map_variable(variable, mapping):
-        print(mapping)
+        # print(mapping)
         return mapping[variable]
 
     @staticmethod
@@ -33,7 +33,7 @@ class DDBN:
         command = ["scoring", "dat.tab", str(ESS), str(paren_lim), "noprune", "bdeu", '0']
         out = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         jkl = out.stdout
-        print(out.stderr)
+        # print(out.stderr)
         return jkl
 
 

@@ -41,5 +41,5 @@ class AbstractDiscretizer(ABC):
     def apply(self, column):
         if not len(self.bins):
             raise ValueError('Discretizer has not been fitted yet or has created empty bins')
-        print(type(self))
+        # print(type(self))
         return pd.cut(column, bins=self.bins, retbins=False, labels=range(0, len(self.bins) - 1))
